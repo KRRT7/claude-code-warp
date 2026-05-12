@@ -47,7 +47,7 @@ The plugin communicates with Warp via OSC 777 escape sequences. Each hook script
 
 Payloads include a protocol version negotiated between the plugin and Warp (`min(plugin_version, warp_version)`), the session ID, working directory, and event-specific fields.
 
-When Warp exports `WARP_CLI_AGENT_IPC`, the notification scripts send the OSC payload over that Unix socket instead of writing to `/dev/tty`. Older Warp builds keep using the terminal fallback.
+When Warp exports `WARP_CLI_AGENT_SEND`, `WARP_CLI_AGENT_IPC`, and `WARP_CLI_AGENT_TOKEN`, the notification scripts hand the JSON payload to Warp's shipped `warp-cli-agent-send` helper, which forwards it to the local authenticated endpoint instead of writing to `/dev/tty`. Older Warp builds keep using the terminal fallback.
 
 The plugin registers six hooks:
 - **SessionStart** — emits the plugin version and a welcome system message
